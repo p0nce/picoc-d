@@ -1756,10 +1756,13 @@ void ExpressionParseFunctionCall(ParseState *Parser,
             }
 
             VariableStackFramePop(Parser);
-        } else {
+        } 
+        else
+        {
             // FIXME: too many parameters?
-            assert(false);
-            //FuncValue.Val.FuncDef_.Intrinsic(Parser, ReturnValue, ParamArray, ArgCount);
+            alias intrinsic_function_t = void function(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs);
+            intrinsic_function_t fun = cast(intrinsic_function_t)(FuncValue.Val.FuncDef_.Intrinsic);
+            fun(Parser, ReturnValue, ParamArray, ArgCount);
         }
 
         HeapPopStackFrame(Parser.  pc);
