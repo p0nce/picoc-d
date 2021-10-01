@@ -1,0 +1,8 @@
+{
+	"name": "run-tests",
+
+	"dependencies": 
+	{
+		"picoc-d": { "path": ".." }
+	}
+}
