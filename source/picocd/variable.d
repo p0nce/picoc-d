@@ -377,7 +377,7 @@ int VariableDefined(Picoc *pc, const char *Ident)
 }
 
 /* get the value of a variable. must be defined. Ident must be registered */
-void VariableGet(Picoc *pc, ParseState *Parser, const char *Ident,
+void VariableGet(Picoc *pc, ParseState *Parser, const(char)*Ident,
     Value **LVal)
 {
     if (pc.TopStackFrame == NULL || !TableGet(&pc.TopStackFrame.LocalTable,
@@ -441,8 +441,7 @@ void VariableStackFrameAdd(ParseState *Parser, const char *FuncName, int NumPara
     ParserCopy(&NewFrame.ReturnParser, Parser);
     NewFrame.FuncName = FuncName;
     NewFrame.Parameter = cast(Value**) (  (NumParams > 0) ? (cast(void*)(cast(char*)NewFrame+(StackFrame.sizeof))) : NULL  );
-    TableInitTable(&NewFrame.LocalTable, cast(TableEntry**)(&NewFrame.LocalHashTable[0]),
-        LOCAL_TABLE_SIZE, false);
+    TableInitTable(&NewFrame.LocalTable, NewFrame.LocalHashTable.ptr, LOCAL_TABLE_SIZE, false);
     NewFrame.PreviousStackFrame = Parser.pc.TopStackFrame;
     Parser.pc.TopStackFrame = NewFrame;
 }

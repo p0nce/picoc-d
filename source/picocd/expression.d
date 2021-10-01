@@ -1468,7 +1468,8 @@ int ExpressionParse(ParseState *Parser, Value  **Result)
                     LexValue.  Val.  Identifier,
                     Parser.  Mode == RunModeRun && Precedence < IgnorePrecedence);
             } else {
-                if (Parser.  Mode == RunModeRun /* && Precedence < IgnorePrecedence */) {
+                if (Parser.  Mode == RunModeRun /* && Precedence < IgnorePrecedence */) 
+                {
                     Value  *VariableValue = NULL;
 
                     VariableGet(Parser.pc, Parser, LexValue.Val.Identifier, &VariableValue);

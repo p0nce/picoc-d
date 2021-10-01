@@ -364,7 +364,7 @@ struct StackFrame
     Value **Parameter;               /* array of parameter values */
     int NumParams;                   /* the number of parameters */
     Table LocalTable;                /* the local variables and parameters */
-    TableEntry[LOCAL_TABLE_SIZE] *LocalHashTable;
+    TableEntry*[LOCAL_TABLE_SIZE] LocalHashTable;
     StackFrame *PreviousStackFrame;  /* the next lower stack frame */
 }
 

@@ -110,10 +110,10 @@ static immutable ReservedWord[] ReservedWords =
 void LexInit(Picoc *pc)
 {
     int Count;
-    TableInitTable(&pc.ReservedWordTable, pc.ReservedWordHashTable.ptr, (ReservedWords.sizeof) / (ReservedWord.sizeof)*2, true);
+    TableInitTable(&pc.ReservedWordTable, pc.ReservedWordHashTable.ptr, ReservedWords.length / 2, true);
 
-    for (Count = 0; Count < (ReservedWords.sizeof) / (ReservedWord.sizeof);
-            Count++) {
+    for (Count = 0; Count < ReservedWords.length; Count++) 
+    {
         TableSet(pc, &pc.ReservedWordTable,
             TableStrRegister(pc, ReservedWords[Count].Word),
             cast(Value*)&ReservedWords[Count], NULL, 0, 0);

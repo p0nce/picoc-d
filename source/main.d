@@ -55,7 +55,7 @@ int main(string[] args)
             PicocPlatformScanFile(&pc, argv[ParamCount]);
 
         if (!DontRunMain)
-            PicocCallMain(&pc, cast(int)(args.length) - ParamCount, &argv[ParamCount]);
+            PicocCallMain(&pc, cast(int)(args.length) - ParamCount, argv.ptr + ParamCount);
     }
 
     PicocCleanup(&pc);

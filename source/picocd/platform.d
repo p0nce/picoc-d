@@ -405,6 +405,7 @@ void PicocPlatformScanFile(Picoc *pc, const(char)* FileName)
 void PlatformExit(Picoc *pc, int RetVal)
 {
     pc.PicocExitValue = RetVal;
+    assert(false);
     //longjmp(pc->PicocExitBuf, 1);
 }
 
