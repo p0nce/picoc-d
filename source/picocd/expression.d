@@ -1472,7 +1472,7 @@ int ExpressionParse(ParseState *Parser, Value  **Result)
                     Value  *VariableValue = NULL;
 
                     VariableGet(Parser.pc, Parser, LexValue.Val.Identifier, &VariableValue);
-                    if (VariableValue.  Typ.  Base == TypeMacro) 
+                    if (VariableValue.Typ.Base == TypeMacro) 
                     {
                         /* evaluate a macro as a kind of simple subroutine */
                         ParseState MacroParser;

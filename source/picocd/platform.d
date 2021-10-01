@@ -369,7 +369,7 @@ char *PlatformReadFile(Picoc *pc, const(char)* FileName)
     char* ReadText = cast(char*) content.ptr;
     char* p;
 
-    // ???
+    // Support #! syntax for scripts I guess
     version(Windows)
     {
         if ((ReadText[0] == '#') && (ReadText[1] == '!')) 
@@ -448,7 +448,7 @@ ubyte[] readFile(const(char)* fileNameZ)
             remaining -= bytesRead;
         }
 
-        p[size] = 0;
+        fileBytes[size] = 0;
 
         return fileBytes;
     }

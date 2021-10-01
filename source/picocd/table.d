@@ -48,7 +48,7 @@ TableEntry *TableSearch(Table *Tbl, const(char) *Key,
     int *AddAt)
 {
     /* shared strings have unique addresses so we don't need to hash them */
-    int HashValue = cast(int)(cast(ulong)Key) % Tbl.Size;
+    int HashValue = cast(uint)(cast(ulong)Key) % Tbl.Size;
     TableEntry *Entry;
 
     for (Entry = Tbl.HashTable[HashValue]; Entry != NULL; Entry = Entry.Next) {
