@@ -666,7 +666,7 @@ LexToken LexScanGetToken(Picoc *pc, LexState *Lexer,
             break;
 // XXX: line continuation feature
         case '\\':
-            if (NextChar == ' ' || NextChar == '\n') {
+            if (NextChar == ' ' || NextChar == '\n' || NextChar == '\r') {
                 LEXER_INC(Lexer);
                 LexSkipLineCont(Lexer, NextChar);
             } else
@@ -701,8 +701,10 @@ void *LexTokenize(Picoc *pc, LexState *Lexer, int *TokenLen)
     int ValueSize;
     int LastCharacterPos = 0;
     int ReserveSpace = cast(int) ( (Lexer.End - Lexer.Pos) * 4 + 16 );
-    void *HeapMem;
-    void *TokenSpace = HeapAllocStack(pc, ReserveSpace);
+
+    // it takes too much space on the stack, so allocate on heap
+    void *TokenSpace = HeapAllocMem(pc, ReserveSpace); 
+
     LexToken Token;
     Value *GotValue;
     char *TokenPos = cast(char*)TokenSpace;
@@ -734,17 +736,13 @@ void *LexTokenize(Picoc *pc, LexState *Lexer, int *TokenLen)
 
     } while (Token != TokenEOF);
 
-    HeapMem = HeapAllocMem(pc, MemUsed);
-    if (HeapMem == NULL)
-        LexFail(pc, Lexer, "(LexTokenize HeapMem == NULL) out of memory");
-
+    // A bit of memory is wasted here.
     assert(ReserveSpace >= MemUsed);
-    memcpy(HeapMem, TokenSpace, MemUsed);
-    HeapPopStack(pc, TokenSpace, ReserveSpace);
+
     if (TokenLen)
         *TokenLen = MemUsed;
 
-    return HeapMem;
+    return TokenSpace;
 }
 
 /* lexically analyse some source text */
