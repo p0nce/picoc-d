@@ -9,6 +9,9 @@ import picocd.platform;
 /* stack grows up from the bottom and heap grows down from
     the top of heap space */
 
+nothrow:
+@nogc:
+
 /* initialize the stack and heap storage */
 void HeapInit(Picoc *pc, int StackOrHeapSize)
 {

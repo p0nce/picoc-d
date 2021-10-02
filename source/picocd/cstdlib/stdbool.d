@@ -6,6 +6,8 @@ import picocd.variable;
 static immutable int trueValue = 1;
 static immutable int falseValue = 0;
 
+@nogc:
+
 
 /* structure definitions */
 static string StdboolDefs = "typedef int bool;";

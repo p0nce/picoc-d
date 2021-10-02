@@ -9,6 +9,8 @@ import picocd.platform;
 import picocd.heap;
 import picocd.table;
 
+@nogc:
+
 /* initialize the shared string system */
 void TableInit(Picoc *pc)
 {
@@ -44,11 +46,11 @@ void TableInitTable(Table *Tbl, TableEntry **HashTable, int Size, int OnHeap)
 }
 
 /* check a hash table entry for a key */
-TableEntry *TableSearch(Table *Tbl, const(char) *Key,
-    int *AddAt)
+TableEntry *TableSearch(Table *Tbl, const(char) *Key, int *AddAt)
 {
     /* shared strings have unique addresses so we don't need to hash them */
-    int HashValue = cast(uint)(cast(ulong)Key) % Tbl.Size;
+    size_t HashValue = (cast(size_t)Key % Tbl.Size);
+    assert(HashValue >= 0 && HashValue < Tbl.Size);
     TableEntry *Entry;
 
     for (Entry = Tbl.HashTable[HashValue]; Entry != NULL; Entry = Entry.Next) {
@@ -56,7 +58,7 @@ TableEntry *TableSearch(Table *Tbl, const(char) *Key,
             return Entry;   /* found */
     }
 
-    *AddAt = HashValue;    /* didn't find it in the chain */
+    *AddAt = cast(int)HashValue;    /* didn't find it in the chain */
     return NULL;
 }
 
@@ -107,10 +109,11 @@ int TableGet(Table *Tbl, const(char) *Key, Value **Val,
 }
 
 /* remove an entry from the table */
-Value *TableDelete(Picoc *pc, Table *Tbl, const char *Key)
+Value *TableDelete(Picoc *pc, Table *Tbl, const(char)* Key)
 {
     /* shared strings have unique addresses so we don't need to hash them */
-    int HashValue = cast(int) (cast(ulong)Key) % Tbl.Size;
+    size_t HashValue = (cast(size_t)Key % Tbl.Size);
+    assert(HashValue >= 0 && HashValue < Tbl.Size);
     TableEntry **EntryPtr;
 
     for (EntryPtr = &Tbl.HashTable[HashValue];
@@ -133,6 +136,7 @@ TableEntry *TableSearchIdentifier(Table *Tbl,
     const char *Key, int Len, int *AddAt)
 {
     int HashValue = TableHash(Key, Len) % Tbl.Size;
+    assert(HashValue >= 0 && HashValue < Tbl.Size);
     TableEntry *Entry;
 
     for (Entry = Tbl.HashTable[HashValue]; Entry != NULL; Entry = Entry.Next) {

@@ -12,6 +12,7 @@ import picocd.lex;
 import picocd.table;
 import picocd.parse;
 
+@nogc:
 
 /* whether evaluation is left to right for a given precedence level */
 bool IS_LEFT_TO_RIGHT(int precedence)
@@ -208,12 +209,11 @@ double ExpressionCoerceFP(Value *Val)
 }
 
 /* assign an integer value */
-long ExpressionAssignInt(ParseState *Parser, Value  *DestValue,
-    long FromInt, int After)
+long ExpressionAssignInt(ParseState *Parser, Value  *DestValue, long FromInt, int After)
 {
     long Result;
 
-    if (!DestValue.  IsLValue)
+    if (!DestValue.IsLValue)
         ProgramFail(Parser, "can't assign to this");
 
     if (After)
@@ -1760,7 +1760,7 @@ void ExpressionParseFunctionCall(ParseState *Parser,
         else
         {
             // FIXME: too many parameters?
-            alias intrinsic_function_t = void function(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs);
+            alias intrinsic_function_t = void function(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs) @nogc;
             intrinsic_function_t fun = cast(intrinsic_function_t)(FuncValue.Val.FuncDef_.Intrinsic);
             fun(Parser, ReturnValue, ParamArray, ArgCount);
         }

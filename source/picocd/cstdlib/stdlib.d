@@ -6,6 +6,7 @@ import picocd.platform;
 import picocd.variable;
 import picocd.table;
 
+@nogc:
 
 static immutable int Stdlib_ZeroValue = 0;
 

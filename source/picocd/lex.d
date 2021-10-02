@@ -12,6 +12,8 @@ import picocd.platform;
 import picocd.parse;
 import picocd.variable;
 
+@nogc:
+
 bool isCidstart(int c)
 {
     return (isalpha(c) || (c)=='_' || (c)=='#');

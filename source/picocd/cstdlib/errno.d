@@ -4,6 +4,8 @@ import core.stdc.errno;
 import picocd.interpreter;
 import picocd.variable;
 
+@nogc:
+
 __gshared EACCESValue = EACCES;
 __gshared EADDRINUSEValue = EADDRINUSE;
 __gshared EADDRNOTAVAILValue = EADDRNOTAVAIL;

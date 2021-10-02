@@ -11,6 +11,8 @@ import picocd.table;
 import picocd.platform;
 import picocd.variable;
 
+@nogc:
+
 enum MAX_FORMAT = 80;
 enum MAX_SCANF_ARGS = 10;
 
@@ -418,16 +420,14 @@ int StdioBasePrintf(ParseState *Parser, FILE *Stream, char *StrOut,
 
 /* internal do-anything v[s][n]scanf() formatting system with input
     from strings or FILE * */
-int StdioBaseScanf(ParseState *Parser, FILE *Stream, char *StrIn,
-    char *Format, StdVararg *Args)
+int StdioBaseScanf(ParseState *Parser, FILE *Stream, char *StrIn, char *Format, StdVararg *Args)
 {
     Value *ThisArg = Args.Param[0];
     int ArgCount = 0;
     void*[MAX_SCANF_ARGS] ScanfArg;
 
     if (Args.NumArgs > MAX_SCANF_ARGS)
-        ProgramFail(Parser, "too many arguments to scanf() - %d max",
-         MAX_SCANF_ARGS);
+        ProgramFail(Parser, "too many arguments to scanf() - %d max", MAX_SCANF_ARGS);
 
     for (ArgCount = 0; ArgCount < Args.NumArgs; ArgCount++) {
         ThisArg = cast(Value*)(cast(char*)ThisArg +
@@ -438,9 +438,7 @@ int StdioBaseScanf(ParseState *Parser, FILE *Stream, char *StrIn,
         else if (ThisArg.Typ.Base == TypeArray)
             ScanfArg[ArgCount] = &ThisArg.Val.ArrayMem[0];
         else
-            ProgramFail(Parser,
-                "non-pointer argument to scanf() - argument %d after format",
-                ArgCount+1);
+            ProgramFail(Parser, "non-pointer argument to scanf() - argument %d after format", ArgCount+1);
     }
 
     if (Stream != NULL)

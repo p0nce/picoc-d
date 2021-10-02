@@ -7,6 +7,9 @@ import core.stdc.stdio;
 
 import picocd.platform;
 
+nothrow:
+@nogc:
+
 enum NULL = null;
 
 ulong MEM_ALIGN(ulong x)
@@ -275,7 +278,8 @@ struct FuncDef
 }
 
 /* macro definition */
-struct MacroDef {
+struct MacroDef 
+{
     int NumParams;              /* the number of parameters */
     char **ParamName;           /* array of parameter names */
      ParseState Body;     /* lexical tokens of the function body
@@ -392,7 +396,7 @@ struct LexState {
 /* library function definition */
 struct LibraryFunction 
 {
-    void function(ParseState *Parser, Value *, Value **, int) Func;
+    void function(ParseState *Parser, Value *, Value **, int) @nogc Func;
     const(char) *Prototype;
 }
 
@@ -448,7 +452,7 @@ struct TokenLine
 struct IncludeLibrary 
 {
     char *IncludeName;
-    void function(Picoc *pc) SetupFunction;
+    void function(Picoc *pc) @nogc SetupFunction ;
     LibraryFunction *FuncList;
     const(char) *SetupCSource;
     IncludeLibrary *NextLib;
@@ -462,6 +466,7 @@ enum BREAKPOINT_TABLE_SIZE = (21);
 /* the entire state of the picoc system */
 struct Picoc
 {
+nothrow @nogc:
     /* parser global data */
     Table GlobalTable;
     CleanupTokenNode *CleanupTokenList;
@@ -543,4 +548,7 @@ struct Picoc
     Table StringTable;
     TableEntry*[STRING_TABLE_SIZE] StringHashTable;
     char *StrEmpty;
+
+    char[7] lastAnonymousIdentStruct; // previous name given to an anonymous struct
+    char[7] lastAnonymousIdentEnum;   // previous name given to an anonymous enum
 }

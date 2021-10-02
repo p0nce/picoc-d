@@ -12,6 +12,8 @@ import picocd.expression;
 import picocd.include;
 import picocd.type;
 
+@nogc:
+
 /* deallocate any memory */
 void ParseCleanup(Picoc *pc)
 {

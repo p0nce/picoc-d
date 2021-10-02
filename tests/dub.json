@@ -1,8 +1,8 @@
 {
-	"name": "run-tests",
+    "name": "run-tests",
 
-	"dependencies": 
-	{
-		"picoc-d": { "path": ".." }
-	}
+    "dependencies": 
+    {
+        "picoc-d": { "path": ".." }
+    }
 }

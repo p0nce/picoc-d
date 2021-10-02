@@ -13,6 +13,8 @@ import picocd.table;
 import picocd.parse;
 import picocd.expression;
 
+@nogc:
+
 /* some basic types */
 __gshared int PointerAlignBytes;
 __gshared int IntAlignBytes;
@@ -231,10 +233,10 @@ void TypeParseStruct(ParseState *Parser, ValueType **Typ,
         LexGetToken(Parser, &LexValue, true);
         StructIdentifier = LexValue.Val.Identifier;
         Token = LexGetToken(Parser, NULL, false);
-    } else {
-        char[7] TempNameBuf;
-        TempNameBuf[] = "^s0000\x00";
-        StructIdentifier = PlatformMakeTempName(pc, TempNameBuf.ptr);
+    } 
+    else 
+    {
+        StructIdentifier = PlatformMakeTempName(pc, pc.lastAnonymousIdentStruct.ptr);
     }
 
     *Typ = TypeGetMatching(pc, Parser, &Parser.pc.UberType,
@@ -341,9 +343,7 @@ void TypeParseEnum(ParseState *Parser, ValueType **Typ)
         EnumIdentifier = LexValue.Val.Identifier;
         Token = LexGetToken(Parser, NULL, false);
     } else {
-        char[7] TempNameBuf;
-        TempNameBuf[] = "^e0000\x00";
-        EnumIdentifier = PlatformMakeTempName(pc, TempNameBuf.ptr);
+        EnumIdentifier = PlatformMakeTempName(pc, pc.lastAnonymousIdentEnum.ptr);
     }
 
     TypeGetMatching(pc, Parser, &pc.UberType, TypeEnum, 0, EnumIdentifier,

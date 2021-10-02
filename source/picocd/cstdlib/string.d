@@ -5,52 +5,46 @@ import picocd.interpreter;
 import picocd.variable;
 import picocd.table;
 
+@nogc:
+
 static immutable String_ZeroValue = 0;
 
-void StringStrcpy(ParseState *Parser, Value *ReturnValue,
-    Value **Param, int NumArgs)
+void StringStrcpy(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Pointer = strcpy(cast(char*) Param[0].Val.Pointer, cast(char*) Param[1].Val.Pointer);
 }
 
-void StringStrncpy(ParseState *Parser, Value *ReturnValue,
-    Value **Param, int NumArgs)
+void StringStrncpy(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Pointer = strncpy(cast(char*) Param[0].Val.Pointer, cast(char*) Param[1].Val.Pointer, Param[2].Val.Integer);
 }
 
-void StringStrcmp(ParseState *Parser, Value *ReturnValue,
-    Value **Param, int NumArgs)
+void StringStrcmp(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Integer = strcmp(cast(char*) Param[0].Val.Pointer, cast(char*) Param[1].Val.Pointer);
 }
 
-void StringStrncmp(ParseState *Parser, Value *ReturnValue,
-    Value **Param, int NumArgs)
+void StringStrncmp(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Integer = strncmp(cast(char*) Param[0].Val.Pointer, cast(char*) Param[1].Val.Pointer, Param[2].Val.Integer);
 }
 
-void StringStrcat(ParseState *Parser, Value *ReturnValue,
-    Value **Param, int NumArgs)
+void StringStrcat(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Pointer = strcat(cast(char*) Param[0].Val.Pointer, cast(char*) Param[1].Val.Pointer);
 }
 
-void StringStrncat(ParseState *Parser, Value *ReturnValue,
-    Value **Param, int NumArgs)
+void StringStrncat(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Pointer = strncat(cast(char*) Param[0].Val.Pointer, cast(char*) Param[1].Val.Pointer, Param[2].Val.Integer);
 }
 
-void StringIndex(ParseState *Parser, Value *ReturnValue,
-                 Value **Param, int NumArgs)
+void StringIndex(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Pointer = index_private(cast(char*) Param[0].Val.Pointer, Param[1].Val.Integer);
 }
 
-void StringRindex(ParseState *Parser, Value *ReturnValue,
-                  Value **Param, int NumArgs)
+void StringRindex(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Pointer = rindex_private(cast(char*) Param[0].Val.Pointer, Param[1].Val.Integer);
 }
@@ -60,8 +54,7 @@ void StringStrlen(ParseState *Parser, Value *ReturnValue, Value **Param, int Num
     ReturnValue.Val.Integer = cast(int) strlen(cast(char*) Param[0].Val.Pointer);
 }
 
-void StringMemset(ParseState *Parser, Value *ReturnValue,
-    Value **Param, int NumArgs)
+void StringMemset(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Pointer = memset(Param[0].Val.Pointer,
         Param[1].Val.Integer, Param[2].Val.Integer);

@@ -13,6 +13,8 @@ import picocd.platform;
 import picocd.cstdlib.stdio;
 
 
+@nogc:
+
 /* endian-ness checking */
 __gshared int BigEndian;
 __gshared int LittleEndian;

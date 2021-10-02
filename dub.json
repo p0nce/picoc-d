@@ -1,3 +1,8 @@
 {
-	"name": "picoc-d"
+	"name": "picoc-d",
+
+    "dependencies":
+    {
+    	"dplug:core": "~>12.0"
+    }	
 }

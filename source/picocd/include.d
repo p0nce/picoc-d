@@ -22,6 +22,8 @@ import picocd.cstdlib.string;
 import picocd.cstdlib.time;
 import picocd.cstdlib.unistd;
 
+@nogc:
+
 
 /* initialize the built-in include libraries */
 void IncludeInit(Picoc *pc)
@@ -57,7 +59,7 @@ void IncludeCleanup(Picoc *pc)
 
 /* register a new build-in include file */
 void IncludeRegister(Picoc *pc, const(char)*IncludeName,
-    void function(Picoc *pc) SetupFunction,
+    void function(Picoc *pc) @nogc SetupFunction ,
     LibraryFunction* FuncList,
     const(char) *SetupCSource)
 {

@@ -11,6 +11,7 @@ import picocd.heap;
 import picocd.parse;
 import picocd.type;
 
+@nogc:
 
 /* maximum size of a value to temporarily copy while we create a variable */
 enum MAX_TMP_COPY_BUF = 256;

@@ -28,11 +28,21 @@ void runTestInternally(string path)
 
     int StackSize = PICOC_STACK_SIZE;
 
-    Picoc pc;
-    PicocInitialize(&pc, StackSize);
-    PicocPlatformScanFile(&pc, toStringz(cfile));
-    PicocCallMain(&pc, 0, null);
-    PicocCleanup(&pc);
+    try
+    {
+        Picoc pc;
+        PicocInitialize(&pc, StackSize);
+        PicocPlatformScanFile(&pc, toStringz(cfile));
+        PicocCallMain(&pc, 0, null);
+        PicocCleanup(&pc);
+    }
+    catch(ProgramExitedException e)
+    {
+        writefln("Exited with exit code: %s", e.exitCode);
+    }
+    catch(Exception e)
+    {
+    }
 }
 
 void runTestAndCheckOutput(string path)

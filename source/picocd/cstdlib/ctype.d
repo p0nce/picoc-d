@@ -3,6 +3,8 @@ module picocd.cstdlib.ctype;
 import core.stdc.ctype;
 import picocd.interpreter;
 
+@nogc:
+
 void StdIsalnum(ParseState *Parser, Value *ReturnValue,
     Value **Param, int NumArgs)
 {

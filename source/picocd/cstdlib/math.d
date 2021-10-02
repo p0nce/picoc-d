@@ -4,6 +4,8 @@ import core.stdc.math;
 import picocd.interpreter;
 import picocd.variable;
 
+@nogc:
+
 static immutable double M_EValue = 2.7182818284590452354;   /* e */
 static immutable double M_LOG2EValue = 1.4426950408889634074;   /* log_2 e */
 static immutable double M_LOG10EValue = 0.43429448190325182765;  /* log_10 e */

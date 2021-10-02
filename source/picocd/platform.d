@@ -6,6 +6,8 @@ import core.stdc.stdarg;
 import core.stdc.stdlib: malloc, free;
 import core.stdc.string: memset, strlen;
 
+import dplug.core.nogc;
+
 import picocd.interpreter;
 import picocd.heap;
 import picocd.table;
@@ -15,8 +17,9 @@ import picocd.parse;
 import picocd.type;
 import picocd.include;
 import picocd.clibrary;
-
 import picocd.cstdlib.stdio;
+
+@nogc:
 
 enum PICOC_VERSION = "v2.3.2";
 
@@ -40,6 +43,27 @@ enum INTERACTIVE_PROMPT_LINE = "     > ";
 
 enum gEnableDebugger = true;
 
+
+class ProgramExitedException : Exception
+{
+    public
+    {
+        @nogc:
+        @safe pure nothrow this(string message,
+                                int exitCode = 1,
+                                string file =__FILE__,
+                                size_t line = __LINE__,
+                                Throwable next = null)
+        {
+            super(message, file, line, next);
+            this.exitCode = exitCode;
+        }
+
+        int exitCode;
+    }
+}
+
+
 /* initialize everything */
 void PicocInitialize(Picoc *pc, int StackSize)
 {
@@ -56,6 +80,8 @@ void PicocInitialize(Picoc *pc, int StackSize)
     //PlatformLibraryInit(pc);
     //static if (gEnableDebugger)
     //    DebugInit(pc);
+    pc.lastAnonymousIdentStruct[] = "^s0000\x00";
+    pc.lastAnonymousIdentEnum[] = "^e0000\x00";
 }
 
 /* free memory */
@@ -407,8 +433,9 @@ void PicocPlatformScanFile(Picoc *pc, const(char)* FileName)
 void PlatformExit(Picoc *pc, int RetVal)
 {
     pc.PicocExitValue = RetVal;
-    assert(false);
-    //longjmp(pc->PicocExitBuf, 1);
+
+    // instead of longjmp, we use throwing instead.
+    throw mallocNew!ProgramExitedException("exited", RetVal);
 }
 
 
