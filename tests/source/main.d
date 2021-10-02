@@ -55,7 +55,7 @@ void runTestAndCheckOutput(string path)
 
     string desiredOutput = cast(string) std.file.read(expectfile).idup;
 
-    string executable = "..\\picoc-d.exe";
+    string executable = "..\\compiler\\picoc-d.exe";
 
     auto res = executeShell(format("%s %s", executable, cfile));
 

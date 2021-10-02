@@ -1,6 +1,6 @@
 import std.stdio;
 import std.string;
-import picocd;
+import picodon;
 
 enum PICOC_STACK_SIZE = (128000*4);
 
