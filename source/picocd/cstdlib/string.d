@@ -43,6 +43,18 @@ void StringStrncat(ParseState *Parser, Value *ReturnValue,
     ReturnValue.Val.Pointer = strncat(cast(char*) Param[0].Val.Pointer, cast(char*) Param[1].Val.Pointer, Param[2].Val.Integer);
 }
 
+void StringIndex(ParseState *Parser, Value *ReturnValue,
+                 Value **Param, int NumArgs)
+{
+    ReturnValue.Val.Pointer = index_private(cast(char*) Param[0].Val.Pointer, Param[1].Val.Integer);
+}
+
+void StringRindex(ParseState *Parser, Value *ReturnValue,
+                  Value **Param, int NumArgs)
+{
+    ReturnValue.Val.Pointer = rindex_private(cast(char*) Param[0].Val.Pointer, Param[1].Val.Integer);
+}
+
 void StringStrlen(ParseState *Parser, Value *ReturnValue, Value **Param, int NumArgs)
 {
     ReturnValue.Val.Integer = cast(int) strlen(cast(char*) Param[0].Val.Pointer);
@@ -155,6 +167,8 @@ static immutable LibraryFunction[] StringFunctions =
     {&StringMemset,  "void *memset(void *,int,int);"},
     {&StringStrcat,  "char *strcat(char *,char *);"},
     {&StringStrncat, "char *strncat(char *,char *,int);"},
+    {&StringIndex,   "char *index(char *,int);"},
+    {&StringRindex,  "char *rindex(char *,int);"},    
     {&StringStrchr,  "char *strchr(char *,int);"},
     {&StringStrrchr, "char *strrchr(char *,int);"},
     {&StringStrcmp,  "int strcmp(char *,char *);"},
@@ -182,3 +196,58 @@ void StringSetupFunc(Picoc *pc)
             cast(AnyValue*)&String_ZeroValue, false);
 }
 
+
+// The rindex() function locates the last occurrence of c (converted to an unsigned char) in the string pointed to by string.
+// The string argument to the function must contain a NULL character (\0) marking the end of the string.
+// The rindex() function is identical to strrchr() — Find last occurrence of character in string.
+// Note: The rindex() function has been moved to the Legacy Option group in Single UNIX Specification, Version 3 and may be withdrawn in a future version. The strrchr() function is preferred for portability.
+//
+// Returned value
+//    If successful, rindex() returns a pointer to the first occurrence of c (converted to an unsigned character) in the string pointed to by string.
+//    If c was not found, rindex() returns a NULL pointer.
+//    There are no errno values defined.
+
+char* rindex_private(const(char)* str, int c)
+{
+    const(char)* result;
+    char ch = cast(char)c;
+    size_t len = strlen(str);
+    result = str + len;
+    assert(*result == '\0');
+
+    while (result >= str)
+    {
+        if (*result == ch)
+            return cast(char*) result;
+        --result;
+    }
+    return null;
+}
+unittest
+{
+    string imba = "iimba";
+    assert( rindex_private(imba.ptr, 'i') == imba.ptr + 1);
+}
+
+char* index_private(const(char)* str, int c)
+{
+    const(char)* result = str;
+    char ch = cast(char)c;
+    size_t n = 0;
+    while(true)
+    {
+        if (*result == ch)
+            return cast(char*) result;
+
+        if (*result == '\0')
+            return null;
+
+        result ++;
+    }
+}
+unittest
+{
+    string imba = "imbaa";
+    assert( index_private(imba.ptr, 'a') == imba.ptr + 3);
+    assert( index_private(imba.ptr, 'r') == null);
+}
