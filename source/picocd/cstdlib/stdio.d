@@ -305,7 +305,7 @@ int StdioBasePrintf(ParseState *Parser, FILE *Stream, char *StrOut,
                     ShowType = &pc.VoidType;
                     break;    /* end of format string */
                 default:
-                    assert(false);
+                    break;
                 }
 
                 /* copy one character of format across to the OneFormatBuf */
