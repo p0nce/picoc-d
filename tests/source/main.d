@@ -33,7 +33,9 @@ void runTestInternally(string path)
         Picoc pc;
         PicocInitialize(&pc, StackSize);
         PicocPlatformScanFile(&pc, toStringz(cfile));
-        PicocCallMain(&pc, 0, null);
+
+        const(char)*[] argv = ["-".ptr, "arg1".ptr, "arg2".ptr, "arg3".ptr, "arg4".ptr];
+        PicocCallMain(&pc, 5, argv.ptr);
         PicocCleanup(&pc);
     }
     catch(ProgramExitedException e)
@@ -55,7 +57,7 @@ void runTestAndCheckOutput(string path)
 
     string desiredOutput = cast(string) std.file.read(expectfile).idup;
 
-    string executable = "..\\compiler\\picoc-d.exe";
+    string executable = "..\\compiler\\picoc.exe";
 
     auto res = executeShell(format("%s %s", executable, cfile));
 

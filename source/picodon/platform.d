@@ -393,40 +393,14 @@ char *PlatformReadFile(Picoc *pc, const(char)* FileName)
     ubyte[] content = readFile(FileName);
     if (content is null)
         ProgramFailNoParser(pc, "file not found");
-
-    char* ReadText = cast(char*) content.ptr;
-    char* p;
-
-    // Support #! syntax for scripts I guess
-    version(Windows)
-    {
-        if ((ReadText[0] == '#') && (ReadText[1] == '!')) 
-        {
-            for (p = ReadText; (*p != '\r') && (*p != '\n'); ++p) 
-            {
-                *p = ' ';
-            }
-        }
-    }
-    else
-    {
-        if ((ReadText[0] == '#') && (ReadText[1] == '!')) 
-        {
-            for (p = ReadText; (*p != '\0') && (*p != '\r') && (*p != '\n'); ++p) 
-            {
-                *p = ' ';
-            }
-        }
-    }
-    return ReadText;
+    return cast(char*) content.ptr;
 }
 
 /* read and scan a file for definitions */
 void PicocPlatformScanFile(Picoc *pc, const(char)* FileName)
 {
     char *SourceStr = PlatformReadFile(pc, FileName);
-    PicocParse(pc, FileName, SourceStr, cast(int) strlen(SourceStr), true, false, true,
-        gEnableDebugger);
+    PicocParse(pc, FileName, SourceStr, cast(int) strlen(SourceStr), true, false, true, gEnableDebugger);
 }
 
 /* exit the program */

@@ -574,7 +574,6 @@ void TypeParse(ParseState *Parser, ValueType **Typ,
     char **Identifier, int *IsStatic)
 {
     ValueType *BasicType;
-
     TypeParseFront(Parser, &BasicType, IsStatic);
     TypeParseIdentPart(Parser, BasicType, Typ, Identifier);
 }
