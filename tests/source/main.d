@@ -3,15 +3,39 @@ import std.process;
 import std.file;
 import std.string;
 
+import picocd;
+
 void main()
 {
+    // check crashes
     foreach(test; TESTS)
     {
-        runTest(test);
-    }    
+        runTestInternally(test);
+    }
+
+/*    foreach(test; TESTS)
+    {
+        runTestAndCheckOutput(test);
+    }  */  
 }
 
-void runTest(string path)
+void runTestInternally(string path)
+{
+    writefln("Running test %s", path);
+    enum PICOC_STACK_SIZE = (128000*4);
+
+    string cfile = path ~ ".c";
+
+    int StackSize = PICOC_STACK_SIZE;
+
+    Picoc pc;
+    PicocInitialize(&pc, StackSize);
+    PicocPlatformScanFile(&pc, toStringz(cfile));
+    PicocCallMain(&pc, 0, null);
+    PicocCleanup(&pc);
+}
+
+void runTestAndCheckOutput(string path)
 {
     writefln("Running test %s", path);
     enum PICOC_STACK_SIZE = (128000*4);
