@@ -1,7 +1,7 @@
-module picocd.cstdlib.ctype;
+module picodon.cstdlib.ctype;
 
 import core.stdc.ctype;
-import picocd.interpreter;
+import picodon.interpreter;
 
 @nogc:
 

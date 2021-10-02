@@ -1,16 +1,16 @@
-module picocd.clibrary;
+module picodon.clibrary;
 
 import core.stdc.string: strlen;
-import picocd.interpreter;
-import picocd.variable;
-import picocd.table;
-import picocd.lex;
-import picocd.parse;
-import picocd.heap;
-import picocd.type;
-import picocd.platform;
+import picodon.interpreter;
+import picodon.variable;
+import picodon.table;
+import picodon.lex;
+import picodon.parse;
+import picodon.heap;
+import picodon.type;
+import picodon.platform;
 
-import picocd.cstdlib.stdio;
+import picodon.cstdlib.stdio;
 
 
 @nogc:

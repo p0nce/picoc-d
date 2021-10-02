@@ -1,11 +1,11 @@
 /* picoc main header file - this has all the main data structures and
  * function prototypes. If you're just calling picoc you should look at the
  * external interface instead, in picoc.h */
-module picocd.interpreter;
+module picodon.interpreter;
 
 import core.stdc.stdio;
 
-import picocd.platform;
+import picodon.platform;
 
 nothrow:
 @nogc:

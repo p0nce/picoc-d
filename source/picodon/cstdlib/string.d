@@ -1,9 +1,9 @@
-module picocd.cstdlib.string;
+module picodon.cstdlib.string;
 
 import core.stdc.string;
-import picocd.interpreter;
-import picocd.variable;
-import picocd.table;
+import picodon.interpreter;
+import picodon.variable;
+import picodon.table;
 
 @nogc:
 

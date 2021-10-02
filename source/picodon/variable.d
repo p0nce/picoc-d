@@ -1,15 +1,15 @@
 /* picoc variable storage. This provides ways of defining and accessing
  * variables */
-module picocd.variable;
+module picodon.variable;
 
 import core.stdc.string: memcpy, memset, strncpy, strlen;
 
-import picocd.interpreter;
-import picocd.table;
-import picocd.platform;
-import picocd.heap;
-import picocd.parse;
-import picocd.type;
+import picodon.interpreter;
+import picodon.table;
+import picodon.platform;
+import picodon.heap;
+import picodon.parse;
+import picodon.type;
 
 @nogc:
 

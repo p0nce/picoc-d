@@ -1,16 +1,16 @@
 /* picoc expression evaluator - a stack-based expression evaluation system
  * which handles operator precedence */
-module picocd.expression;
+module picodon.expression;
 
 import core.stdc.string;
-import picocd.interpreter;
-import picocd.variable;
-import picocd.platform;
-import picocd.heap;
-import picocd.type;
-import picocd.lex;
-import picocd.table;
-import picocd.parse;
+import picodon.interpreter;
+import picodon.variable;
+import picodon.platform;
+import picodon.heap;
+import picodon.type;
+import picodon.lex;
+import picodon.table;
+import picodon.parse;
 
 @nogc:
 

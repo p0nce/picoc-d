@@ -1,15 +1,15 @@
-module picocd.cstdlib.stdio;
+module picodon.cstdlib.stdio;
 
 import core.stdc.stdio;
 import core.stdc.string;
 import core.stdc.inttypes;
 import core.stdc.errno;
-import picocd.interpreter;
-import picocd.type;
-import picocd.expression;
-import picocd.table;
-import picocd.platform;
-import picocd.variable;
+import picodon.interpreter;
+import picodon.type;
+import picodon.expression;
+import picodon.table;
+import picodon.platform;
+import picodon.variable;
 
 @nogc:
 

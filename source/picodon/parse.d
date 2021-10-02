@@ -1,16 +1,16 @@
 /* picoc parser - parses source and executes statements */
-module picocd.parse;
+module picodon.parse;
 
 import core.stdc.string: strcmp, memcpy;
-import picocd.interpreter;
-import picocd.heap;
-import picocd.lex;
-import picocd.platform;
-import picocd.variable;
-import picocd.table;
-import picocd.expression;
-import picocd.include;
-import picocd.type;
+import picodon.interpreter;
+import picodon.heap;
+import picodon.lex;
+import picodon.platform;
+import picodon.variable;
+import picodon.table;
+import picodon.expression;
+import picodon.include;
+import picodon.type;
 
 @nogc:
 

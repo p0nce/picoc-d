@@ -3,7 +3,7 @@ import std.process;
 import std.file;
 import std.string;
 
-import picocd;
+import picodon;
 
 void main()
 {
@@ -13,10 +13,10 @@ void main()
         runTestInternally(test);
     }
 
-/*    foreach(test; TESTS)
+    foreach(test; TESTS)
     {
         runTestAndCheckOutput(test);
-    }  */  
+    }
 }
 
 void runTestInternally(string path)

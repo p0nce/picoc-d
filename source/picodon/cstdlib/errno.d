@@ -1,8 +1,8 @@
-module picocd.cstdlib.errno;
+module picodon.cstdlib.errno;
 
 import core.stdc.errno;
-import picocd.interpreter;
-import picocd.variable;
+import picodon.interpreter;
+import picodon.variable;
 
 @nogc:
 

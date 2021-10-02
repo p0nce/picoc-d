@@ -1,8 +1,8 @@
-module picocd.cstdlib.math;
+module picodon.cstdlib.math;
 
 import core.stdc.math;
-import picocd.interpreter;
-import picocd.variable;
+import picodon.interpreter;
+import picodon.variable;
 
 @nogc:
 

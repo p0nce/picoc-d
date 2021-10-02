@@ -1,5 +1,5 @@
 /* all platform-specific includes and defines go in this file */
-module picocd.platform;
+module picodon.platform;
 
 import core.stdc.stdio;
 import core.stdc.stdarg;
@@ -8,16 +8,16 @@ import core.stdc.string: memset, strlen;
 
 import dplug.core.nogc;
 
-import picocd.interpreter;
-import picocd.heap;
-import picocd.table;
-import picocd.variable;
-import picocd.lex;
-import picocd.parse;
-import picocd.type;
-import picocd.include;
-import picocd.clibrary;
-import picocd.cstdlib.stdio;
+import picodon.interpreter;
+import picodon.heap;
+import picodon.table;
+import picodon.variable;
+import picodon.lex;
+import picodon.parse;
+import picodon.type;
+import picodon.include;
+import picodon.clibrary;
+import picodon.cstdlib.stdio;
 
 @nogc:
 

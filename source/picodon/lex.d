@@ -1,16 +1,16 @@
 /* picoc lexer - converts source text into a tokenised form */
-module picocd.lex;
+module picodon.lex;
 
 import core.stdc.ctype;
 import core.stdc.string: strlen, memcpy;
 import std.math: pow;
 
-import picocd.interpreter;
-import picocd.heap;
-import picocd.table;
-import picocd.platform;
-import picocd.parse;
-import picocd.variable;
+import picodon.interpreter;
+import picodon.heap;
+import picodon.table;
+import picodon.platform;
+import picodon.parse;
+import picodon.variable;
 
 @nogc:
 

@@ -1,8 +1,8 @@
-module picocd.cstdlib.time;
+module picodon.cstdlib.time;
 
 import core.stdc.time;
 
-import picocd.interpreter;
+import picodon.interpreter;
 
 /+
 static int CLOCKS_PER_SECValue = CLOCKS_PER_SEC;

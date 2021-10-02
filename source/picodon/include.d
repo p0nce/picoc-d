@@ -1,26 +1,26 @@
 /* picoc include system - can emulate system includes from built-in libraries
  * or it can include and parse files if the system has files */
-module picocd.include;
+module picodon.include;
 
 import core.stdc.string: strcmp, strlen;
 
-import picocd.interpreter;
-import picocd.parse;
-import picocd.heap;
-import picocd.table;
-import picocd.variable;
-import picocd.clibrary;
-import picocd.platform;
+import picodon.interpreter;
+import picodon.parse;
+import picodon.heap;
+import picodon.table;
+import picodon.variable;
+import picodon.clibrary;
+import picodon.platform;
 
-import picocd.cstdlib.ctype;
-import picocd.cstdlib.errno;
-import picocd.cstdlib.math;
-import picocd.cstdlib.stdbool;
-import picocd.cstdlib.stdio;
-import picocd.cstdlib.stdlib;
-import picocd.cstdlib.string;
-import picocd.cstdlib.time;
-import picocd.cstdlib.unistd;
+import picodon.cstdlib.ctype;
+import picodon.cstdlib.errno;
+import picodon.cstdlib.math;
+import picodon.cstdlib.stdbool;
+import picodon.cstdlib.stdio;
+import picodon.cstdlib.stdlib;
+import picodon.cstdlib.string;
+import picodon.cstdlib.time;
+import picodon.cstdlib.unistd;
 
 @nogc:
 

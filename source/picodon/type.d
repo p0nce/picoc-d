@@ -1,17 +1,17 @@
 /* picoc data type module. This manages a tree of data types and has facilities
  * for parsing data types. */
-module picocd.type;
+module picodon.type;
 
 import core.stdc.string: memset;
 
-import picocd.interpreter;
-import picocd.variable;
-import picocd.platform;
-import picocd.lex;
-import picocd.heap;
-import picocd.table;
-import picocd.parse;
-import picocd.expression;
+import picodon.interpreter;
+import picodon.variable;
+import picodon.platform;
+import picodon.lex;
+import picodon.heap;
+import picodon.table;
+import picodon.parse;
+import picodon.expression;
 
 @nogc:
 

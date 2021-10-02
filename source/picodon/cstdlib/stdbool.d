@@ -1,7 +1,7 @@
-module picocd.cstdlib.stdbool;
+module picodon.cstdlib.stdbool;
 
-import picocd.interpreter;
-import picocd.variable;
+import picodon.interpreter;
+import picodon.variable;
 
 static immutable int trueValue = 1;
 static immutable int falseValue = 0;

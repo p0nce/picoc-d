@@ -3,6 +3,6 @@
 
     "dependencies": 
     {
-        "picoc-d": { "path": ".." }
+        "picodon": { "path": ".." }
     }
 }

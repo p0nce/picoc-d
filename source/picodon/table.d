@@ -1,13 +1,13 @@
 /* picoc hash table module. This hash table code is used for both symbol tables
  * and the shared string table. */
-module picocd.table;
+module picodon.table;
 
 import core.stdc.string;
-import picocd.interpreter;
-import picocd.variable;
-import picocd.platform;
-import picocd.heap;
-import picocd.table;
+import picodon.interpreter;
+import picodon.variable;
+import picodon.platform;
+import picodon.heap;
+import picodon.table;
 
 @nogc:
 

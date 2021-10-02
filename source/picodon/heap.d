@@ -1,10 +1,10 @@
 /* picoc heap memory allocation. */
-module picocd.heap;
+module picodon.heap;
 
 import core.stdc.stdlib: malloc, free, calloc;
 import core.stdc.string: memset;
-import picocd.interpreter;
-import picocd.platform;
+import picodon.interpreter;
+import picodon.platform;
 
 /* stack grows up from the bottom and heap grows down from
     the top of heap space */

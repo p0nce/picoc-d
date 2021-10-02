@@ -1,0 +1,8 @@
+{
+	"name": "picoc",
+
+    "dependencies":
+    {
+    	"picodon": { "path": ".." }
+    }	
+}
