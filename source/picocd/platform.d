@@ -365,6 +365,8 @@ void PlatformPutc(char OutCh, OutputStreamInfo *Stream)
 char *PlatformReadFile(Picoc *pc, const(char)* FileName)
 {
     ubyte[] content = readFile(FileName);
+    if (content is null)
+        ProgramFailNoParser(pc, "file not found");
 
     char* ReadText = cast(char*) content.ptr;
     char* p;
