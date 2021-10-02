@@ -1,2 +1,3 @@
-# picoc-d
-picoc ported to D
+# picodon
+
+picodong is a port of picoc to D.
